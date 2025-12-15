@@ -2,7 +2,7 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
-  <title>社会</title>
+  <title>コンピュータ部クイズ</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <style>
     body {
@@ -102,7 +102,7 @@
   </style>
 </head>
 <body>
-  <h1>社会</h1>
+  <h1>コンピュータ部クイズ</h1>
   <div class="question" id="question">問題を読み込み中...</div>
   <div class="image-container" id="image-container"></div>
   <div class="choices" id="choices"></div>
@@ -113,7 +113,7 @@
     const quiz = [
       {
         question: "3年生部員が部活中にした意外なこととは？",
-        choices: ["靴洗い", "運動", "料理", ""],
+        choices: ["靴洗い", "ランニング", "料理", "かくれんぼ"],
         answer:"靴洗い"
       },
     ];
@@ -171,11 +171,11 @@
     }
 
     function showScore() {
-      questionEl.textContent = "全問終了！";
+      //questionEl.textContent = "全問終了！";
       imageEl.innerHTML = "";
       choicesEl.innerHTML = "";
       resultEl.textContent = "";
-      scoreEl.textContent = `あなたのスコア：${score} / ${quiz.length} 点`;
+      scoreEl.textContent = `${score} / ${quiz.length} 問正解`;
     }
 
     showQuestion();
