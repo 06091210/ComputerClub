@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>社会</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body {
+      font-family: "Hiragino Kaku Gothic ProN", sans-serif;
+      background-color: #fff8e1;
+      text-align: center;
+      padding: 20px;
+    }
+    h1 {
+      color: #333;
+      margin-bottom: 20px;
+    }
+    .question {
+      font-size: 24px;
+      margin-bottom: 15px;
+    }
+    .image-container img {
+      width: 80%;
+      max-width: 400px;
+      border-radius: 10px;
+      margin-bottom: 20px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
+
+    /* 2×2グリッド配置 */
+    .choices {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 15px;
+      max-width: 400px;
+      margin: 0 auto;
+    }
+
+    button {
+      padding: 15px;
+      font-size: 18px;
+      border: none;
+      border-radius: 8px;
+      background-color: #4CAF50;
+      color: white;
+      cursor: pointer;
+      transition: background-color 0.2s;
+      width: 100%;
+    }
+    button:hover {
+      background-color: #45a049;
+    }
+
+    .result {
+      margin-top: 20px;
+      font-size: 22px;
+      font-weight: bold;
+    }
+
+    .score {
+      font-size: 26px;
+      margin-top: 30px;
+      font-weight: bold;
+      color: #333;
+    }
+
+    a.back {
+      display: inline-block;
+      margin-top: 40px;
+      text-decoration: none;
+      font-size: 18px;
+      color: #2196F3;
+    }
+
+    .popup {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) scale(0.5);
+      font-size: 120px;
+      opacity: 0;
+      z-index: 9999;
+      pointer-events: none;
+      animation: popupAnim 0.8s ease-out forwards;
+      text-shadow: 0 0 20px rgba(0,0,0,0.3);
+    }
+
+    .popup.correct {
+      color: red;
+    }
+
+    .popup.wrong {
+      color: #2196F3;
+    }
+
+    @keyframes popupAnim {
+      0% { opacity: 0; transform: translate(-50%, -50%) scale(0.5); }
+      40% { opacity: 1; transform: translate(-50%, -50%) scale(1.2); }
+      70% { transform: translate(-50%, -50%) scale(1); }
+      100% { opacity: 0; transform: translate(-50%, -50%) scale(0.8); }
+    }
+  </style>
+</head>
+<body>
+  <h1>社会</h1>
+  <div class="question" id="question">問題を読み込み中...</div>
+  <div class="image-container" id="image-container"></div>
+  <div class="choices" id="choices"></div>
+  <div class="result" id="result"></div>
+  <div class="score" id="score"></div>
+
+  <script>
+    const quiz = [
+      {
+        question: "3年生部員が部活中にした意外なこととは？",
+        choices: ["靴洗い", "運動", "料理", ""],
+        answer:"靴洗い"
+      },
+    ];
+
+    let current = 0;
+    let score = 0;
+
+    const questionEl = document.getElementById("question");
+    const imageEl = document.getElementById("image-container");
+    const choicesEl = document.getElementById("choices");
+    const resultEl = document.getElementById("result");
+    const scoreEl = document.getElementById("score");
+
+    function showQuestion() {
+      const q = quiz[current];
+      questionEl.textContent = `Q${current + 1}. ${q.question}`;
+      resultEl.textContent = "";
+      scoreEl.textContent = "";
+
+      imageEl.innerHTML = q.image ? `<img src="${q.image}" alt="問題画像">` : "";
+
+      choicesEl.innerHTML = "";
+      q.choices.forEach(choice => {
+        const btn = document.createElement("button");
+        btn.textContent = choice;
+        btn.onclick = () => checkAnswer(choice);
+        choicesEl.appendChild(btn);
+      });
+    }
+
+    function showPopup(isCorrect) {
+      const popup = document.createElement("div");
+      popup.className = `popup ${isCorrect ? "correct" : "wrong"}`;
+      popup.textContent = isCorrect ? "⭕️" : "❌";
+      document.body.appendChild(popup);
+      setTimeout(() => popup.remove(), 1000);
+    }
+
+    function checkAnswer(choice) {
+      const correct = quiz[current].answer;
+      const isCorrect = choice === correct;
+        showPopup(isCorrect);
+      if (isCorrect) {
+        score++;
+      } 
+      else {
+        resultEl.textContent = `正解は「${correct}」`;
+      }
+      current++;
+      if (current < quiz.length) {
+        setTimeout(showQuestion, 1500);
+      } else {
+        setTimeout(showScore, 1500);
+      }
+    }
+
+    function showScore() {
+      questionEl.textContent = "全問終了！";
+      imageEl.innerHTML = "";
+      choicesEl.innerHTML = "";
+      resultEl.textContent = "";
+      scoreEl.textContent = `あなたのスコア：${score} / ${quiz.length} 点`;
+    }
+
+    showQuestion();
+  </script>
+</body>
+</html>
