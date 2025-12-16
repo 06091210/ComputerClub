@@ -1,0 +1,141 @@
+/* 全体 */
+body {
+  font-family: "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", Meiryo, sans-serif;
+  background: #eef2f7;
+  margin: 0;
+  padding: 20px;
+  text-align: center;
+}
+
+/* 入力欄 */
+#input {
+  width: 200px;
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  margin-bottom: 10px;
+}
+
+/* OKボタン */
+#button {
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 8px;
+  border: none;
+  background-color: #4a90e2;
+  color: #fff;
+  cursor: pointer;
+  transition: background-color 0.2s, transform 0.1s;
+}
+
+#button:hover {
+  background-color: #357abd;
+}
+
+#button:active {
+  transform: scale(0.96);
+}
+
+/* メッセージ表示 */
+#h3 {
+  margin-top: 20px;
+  font-size: 22px;
+  color: #333;
+}
+
+/* クイズ全体 */
+.question {
+  font-size: 20px;
+  font-weight: bold;
+  margin: 20px 0;
+  color: #222;
+}
+
+/* 選択肢 */
+.choices {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-width: 300px;
+  margin: 0 auto;
+}
+
+.choices button {
+  padding: 12px;
+  font-size: 16px;
+  border-radius: 10px;
+  border: none;
+  background-color: #ffffff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: background-color 0.2s, transform 0.1s;
+}
+
+.choices button:hover {
+  background-color: #f0f6ff;
+}
+
+.choices button:active {
+  transform: scale(0.97);
+}
+
+/* 結果表示 */
+.result {
+  margin-top: 15px;
+  font-size: 16px;
+  color: #e74c3c;
+}
+
+/* スコア */
+.score {
+  margin-top: 20px;
+  font-size: 22px;
+  font-weight: bold;
+  color: #2c3e50;
+}
+
+/* 正誤ポップアップ */
+.popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 80px;
+  animation: fadeScale 1s ease forwards;
+  pointer-events: none;
+}
+
+.popup.correct {
+  color: #2ecc71;
+}
+
+.popup.wrong {
+  color: #e74c3c;
+}
+
+@keyframes fadeScale {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.5);
+  }
+  30% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1.2);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
+
+/* スマホ対応 */
+@media (max-width: 480px) {
+  .question {
+    font-size: 18px;
+  }
+
+  .choices button {
+    font-size: 15px;
+  }
+}
