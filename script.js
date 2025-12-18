@@ -1,4 +1,4 @@
-num = ["3310", "3304", "3303", "3316"];
+num = ["3310", "3304", "3303", "3316", "2310", "2330", "2504", "2524", "2527", "3314", "3406"];
 message = ["リクシ", "ナギ", "スカイ", "シロハ＝カロウ"];
 Input = document.getElementById("input");
 Button = document.getElementById("button");
